@@ -358,3 +358,18 @@
   .fc26-career-card { align-items:flex-start; flex-wrap:wrap; }
   .fc26-open-career { margin-left:0; width:100%; justify-content:center; }
 }
+
+.fc26-career-layout { width:min(900px,100%); }
+.fc26-career-intro { display:flex; align-items:center; gap:22px; margin-bottom:26px; }
+.fc26-player-badge { width:82px; height:82px; flex:none; display:flex; flex-direction:column; justify-content:center; padding-left:18px; box-sizing:border-box; background:#b7ff38; color:#06110e; transform:skew(-8deg); }
+.fc26-player-badge span { font-size:8px; font-weight:950; letter-spacing:2px; }
+.fc26-player-badge strong { font-size:38px; line-height:1; font-style:italic; }
+.fc26-form-heading { display:flex; align-items:center; gap:13px; padding-bottom:5px; border-bottom:1px solid rgba(255,255,255,.08); margin-bottom:2px; }
+.fc26-form-heading > span { color:#b7ff38; font-size:22px; font-weight:950; font-style:italic; }
+.fc26-form-heading strong { display:block; font-size:11px; letter-spacing:2px; }
+.fc26-form-heading small { display:block; margin-top:3px; color:#60786f; font-size:7px; letter-spacing:1.5px; }
+@media (max-width:600px) {
+  .fc26-career-intro { align-items:flex-start; }
+  .fc26-player-badge { width:64px; height:64px; padding-left:12px; }
+  .fc26-player-badge strong { font-size:29px; }
+}

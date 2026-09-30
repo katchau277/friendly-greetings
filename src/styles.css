@@ -221,54 +221,27 @@
   }
 }
 
-/* Creator signature — styled like an FC broadcast badge */
-.fc26-creator{
-  position:absolute;
-  top:22px;
-  left:22px;
-  z-index:10;
-  display:flex;
-  align-items:center;
-  gap:8px;
-  padding:7px 11px 7px 8px;
-  background:rgba(4,15,12,.78);
-  border-left:3px solid #b7ff38;
-  border-top:1px solid rgba(183,255,56,.22);
-  border-right:1px solid rgba(255,255,255,.08);
-  border-bottom:1px solid rgba(255,255,255,.08);
-  box-shadow:0 8px 24px rgba(0,0,0,.25);
-  color:#60786f;
+/* Creator name under FC 26 branding */
+.fc26-brand > div{
+  position:relative;
+}
+.fc26-brand .fc26-creator{
+  display:block;
+  margin-top:6px;
+  color:#b7ff38;
   font-size:7px;
   font-weight:900;
-  letter-spacing:2px;
+  letter-spacing:2.2px;
   line-height:1;
-  pointer-events:none;
-  transform:skew(-8deg);
-}
-.fc26-creator::before{
-  content:"";
-  width:5px;
-  height:5px;
-  background:#b7ff38;
-  box-shadow:0 0 10px rgba(183,255,56,.7);
-}
-.fc26-creator strong{
-  color:#f4fff9;
-  font-size:9px;
-  letter-spacing:2.4px;
   font-style:italic;
 }
-.fc26-creator strong::after{
-  content:" / 26";
-  color:#b7ff38;
-  margin-left:4px;
-  font-size:7px;
-  letter-spacing:1.5px;
+.fc26-brand .fc26-creator::before,
+.fc26-brand .fc26-creator strong::after{
+  display:none;
 }
 @media(max-width:600px){
-  .fc26-creator{
-    top:12px;
-    left:12px;
-    padding:6px 9px 6px 7px;
+  .fc26-brand .fc26-creator{
+    font-size:6px;
+    margin-top:5px;
   }
 }

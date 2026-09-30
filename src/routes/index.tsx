@@ -1,28 +1,47 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowRight, Trophy, Users, BarChart3, Settings, Play, Plus, ArrowLeft, Upload, Shield } from "lucide-react";
 
 export const Route = createFileRoute("/")({ component: Index });
 
+const STORAGE_KEY = "fc26-career-data";
+
+type SavedCareerData = {
+  athleteName: string; position: string; clubs: string; country: string; preferredFoot: string;
+  careerSaved: boolean; playerPhoto: string; titles: string; careerClubs: string; seasons: string;
+  games: string; goals: string; assists: string; cleanSheets: string; sound: boolean; animations: boolean; compactMode: boolean;
+};
+
+function getSavedData(): Partial<SavedCareerData> {
+  if (typeof window === "undefined") return {};
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}"); } catch { return {}; }
+}
+
 function Index() {
+  const saved = getSavedData();
   const [screen, setScreen] = useState<"menu" | "career" | "dashboard" | "roster" | "stats" | "settings">("menu");
-  const [athleteName, setAthleteName] = useState("");
-  const [position, setPosition] = useState("");
-  const [clubs, setClubs] = useState("");
-  const [country, setCountry] = useState("");
-  const [preferredFoot, setPreferredFoot] = useState("");
-  const [careerSaved, setCareerSaved] = useState(false);
-  const [playerPhoto, setPlayerPhoto] = useState("");
-  const [titles, setTitles] = useState("");
-  const [careerClubs, setCareerClubs] = useState(clubs);
-  const [seasons, setSeasons] = useState("");
-  const [games, setGames] = useState("");
-  const [goals, setGoals] = useState("");
-  const [assists, setAssists] = useState("");
-  const [cleanSheets, setCleanSheets] = useState("");
-  const [sound, setSound] = useState(true);
-  const [animations, setAnimations] = useState(true);
-  const [compactMode, setCompactMode] = useState(false);
+  const [athleteName, setAthleteName] = useState(saved.athleteName || "");
+  const [position, setPosition] = useState(saved.position || "");
+  const [clubs, setClubs] = useState(saved.clubs || "");
+  const [country, setCountry] = useState(saved.country || "");
+  const [preferredFoot, setPreferredFoot] = useState(saved.preferredFoot || "");
+  const [careerSaved, setCareerSaved] = useState(saved.careerSaved || false);
+  const [playerPhoto, setPlayerPhoto] = useState(saved.playerPhoto || "");
+  const [titles, setTitles] = useState(saved.titles || "");
+  const [careerClubs, setCareerClubs] = useState(saved.careerClubs || saved.clubs || "");
+  const [seasons, setSeasons] = useState(saved.seasons || "");
+  const [games, setGames] = useState(saved.games || "");
+  const [goals, setGoals] = useState(saved.goals || "");
+  const [assists, setAssists] = useState(saved.assists || "");
+  const [cleanSheets, setCleanSheets] = useState(saved.cleanSheets || "");
+  const [sound, setSound] = useState(saved.sound ?? true);
+  const [animations, setAnimations] = useState(saved.animations ?? true);
+  const [compactMode, setCompactMode] = useState(saved.compactMode ?? false);
+
+  useEffect(() => {
+    const data: SavedCareerData = { athleteName, position, clubs, country, preferredFoot, careerSaved, playerPhoto, titles, careerClubs, seasons, games, goals, assists, cleanSheets, sound, animations, compactMode };
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch {}
+  }, [athleteName, position, clubs, country, preferredFoot, careerSaved, playerPhoto, titles, careerClubs, seasons, games, goals, assists, cleanSheets, sound, animations, compactMode]);
 
   const items = [
     { label: "JOGAR", icon: Play, active: true },
@@ -164,8 +183,8 @@ function Index() {
           <button type="button" className="fc26-back" onClick={() => setScreen("career")}><ArrowLeft size={17} /> VOLTAR PARA CARREIRA</button>
           <div className="fc26-dashboard-heading"><div><span className="fc26-card-label">PLAYER PROFILE / 02</span><h2>MINHA <span>CARREIRA</span></h2><p>Registre a história completa do seu jogador.</p></div></div>
           <div className="fc26-dashboard-grid">
-            <div className="fc26-photo-panel"><div className="fc26-photo-frame">{playerPhoto ? <img src={playerPhoto} alt={athleteName} /> : <div className="fc26-photo-empty"><Upload size={30}/><strong>FOTO DO JOGADOR</strong><small>Adicione uma imagem da sua carreira</small></div>}</div><label className="fc26-upload-button"><Upload size={17}/> {playerPhoto ? "TROCAR FOTO" : "ADICIONAR FOTO"}<input type="file" accept="image/*" onChange={(event) => { const file = event.target.files?.[0]; if (file) setPlayerPhoto(URL.createObjectURL(file)); }} /></label></div>
-            <div className="fc26-history-panel"><div className="fc26-history-title"><span>02</span><div><strong>HISTÓRICO DO JOGADOR</strong><small>TÍTULOS • CLUBES • TEMPORADAS</small></div></div><label>Clubes da carreira<input value={careerClubs} onChange={(event) => setCareerClubs(event.target.value)} placeholder="Ex.: Santos, Real Madrid, Manchester City" /></label><label>Títulos conquistados<input value={titles} onChange={(event) => setTitles(event.target.value)} placeholder="Ex.: 2x Liga dos Campeões, 1x Mundial" /></label><label>Total de temporadas<input type="number" min="0" value={seasons} onChange={(event) => setSeasons(event.target.value)} placeholder="Ex.: 8" /></label><button type="button" className="fc26-save-history" onClick={() => {}}>SALVAR HISTÓRICO <ArrowRight size={17}/></button></div>
+            <div className="fc26-photo-panel"><div className="fc26-photo-frame">{playerPhoto ? <img src={playerPhoto} alt={athleteName} /> : <div className="fc26-photo-empty"><Upload size={30}/><strong>FOTO DO JOGADOR</strong><small>Adicione uma imagem da sua carreira</small></div>}</div><label className="fc26-upload-button"><Upload size={17}/> {playerPhoto ? "TROCAR FOTO" : "ADICIONAR FOTO"}<input type="file" accept="image/*" onChange={(event) => { const file = event.target.files?.[0]; if (file) { const reader = new FileReader(); reader.onload = () => setPlayerPhoto(String(reader.result)); reader.readAsDataURL(file); } }} /></label></div>
+            <div className="fc26-history-panel"><div className="fc26-history-title"><span>02</span><div><strong>HISTÓRICO DO JOGADOR</strong><small>TÍTULOS • CLUBES • TEMPORADAS</small></div></div><label>Clubes da carreira<input value={careerClubs} onChange={(event) => setCareerClubs(event.target.value)} placeholder="Ex.: Santos, Real Madrid, Manchester City" /></label><label>Títulos conquistados<input value={titles} onChange={(event) => setTitles(event.target.value)} placeholder="Ex.: 2x Liga dos Campeões, 1x Mundial" /></label><label>Total de temporadas<input type="number" min="0" value={seasons} onChange={(event) => setSeasons(event.target.value)} placeholder="Ex.: 8" /></label><button type="button" className="fc26-save-history" onClick={() => { localStorage.setItem(STORAGE_KEY, JSON.stringify({ athleteName, position, clubs, country, preferredFoot, careerSaved, playerPhoto, titles, careerClubs, seasons, games, goals, assists, cleanSheets, sound, animations, compactMode })); }}>SALVAR HISTÓRICO <ArrowRight size={17}/></button></div>
           </div>
           <div className="fc26-player-summary"><div><span>ATLETA</span><strong>{athleteName}</strong></div><div><span>PAÍS</span><strong>{country}</strong></div><div><span>POSIÇÕES</span><strong>{position || "A DEFINIR"}</strong></div><div><span>PERNA</span><strong>{preferredFoot}</strong></div></div>
         </section>

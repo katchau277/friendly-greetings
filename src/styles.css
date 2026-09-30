@@ -373,3 +373,11 @@
   .fc26-player-badge { width:64px; height:64px; padding-left:12px; }
   .fc26-player-badge strong { font-size:29px; }
 }
+
+.fc26-career-form select {
+  width:100%; box-sizing:border-box; height:46px; padding:0 13px;
+  border:1px solid rgba(255,255,255,.1); background:rgba(0,0,0,.38);
+  color:#f4fff9; outline:none; font:inherit; font-size:12px; letter-spacing:.4px;
+}
+.fc26-career-form select:focus { border-color:rgba(183,255,56,.65); box-shadow:0 0 0 2px rgba(183,255,56,.08); }
+.fc26-career-form option { background:#081814; color:#f4fff9; }

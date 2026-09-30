@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type Dispatch, type SetStateAction } from "react";
 import { ArrowRight, Trophy, Users, BarChart3, Settings, Play, Plus, ArrowLeft, Upload, Shield } from "lucide-react";
 
 export const Route = createFileRoute("/")({ component: Index });
@@ -54,7 +54,7 @@ function Index() {
   }, [athleteName, position, clubs, country, preferredFoot, careerSaved, playerPhoto, titles, careerClubs, seasons, games, goals, assists, cleanSheets, champions, leagues, cups, clubWorldCups, superCups, worldCups, otherTrophies, sound, animations, compactMode]);
 
   const saveAll = () => {
-    const data: SavedCareerData = { athleteName, position, clubs, country, preferredFoot, careerSaved, playerPhoto, titles, careerClubs, seasons, games, goals, assists, cleanSheets, sound, animations, compactMode };
+    const data: SavedCareerData = { athleteName, position, clubs, country, preferredFoot, careerSaved, playerPhoto, titles, careerClubs, seasons, games, goals, assists, cleanSheets, champions, leagues, cups, clubWorldCups, superCups, worldCups, otherTrophies, sound, animations, compactMode };
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); setSaveMessage("SALVO COM SUCESSO"); } catch { setSaveMessage("ERRO AO SALVAR"); }
   };
 
@@ -199,7 +199,7 @@ function Index() {
               <label key={String(label)} className="fc26-trophy-card">
                 <span className="fc26-trophy-icon"><Trophy size={22}/></span>
                 <span className="fc26-trophy-name">{String(label)}</span>
-                <input type="number" min="0" value={String(value)} onChange={(e) => (setter as React.Dispatch<React.SetStateAction<string>>)(e.target.value)} placeholder="0" aria-label={String(iconLabel)} />
+                <input type="number" min="0" value={String(value)} onChange={(e) => (setter as Dispatch<SetStateAction<string>>)(e.target.value)} placeholder="0" aria-label={String(iconLabel)} />
                 <small>CONQUISTADOS</small>
               </label>
             ))}

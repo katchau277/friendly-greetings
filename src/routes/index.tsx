@@ -61,11 +61,11 @@ function Index() {
       <div className="fc26-glow fc26-glow-two" />
 
       <header className="fc26-header">
-        <div className="fc26-brand"><span className="fc26-brand-mark">26</span><div><strong>FC</strong><span>ULTIMATE MENU</span></div></div>
+        <div className="fc26-brand"><span className="fc26-brand-mark">26</span><div><strong>FC</strong><span>ULTIMATE MENU</span><small className="fc26-creator">FLAVIO</small></div></div>
         <div className="fc26-status"><span className="fc26-dot" />{screen === "career" ? "MODO ATLETA" : screen === "dashboard" ? "PERFIL DO JOGADOR" : screen === "roster" ? "ELENCO" : screen === "stats" ? "ESTATÍSTICAS" : screen === "settings" ? "CONFIGURAÇÕES" : "MENU PRINCIPAL"}</div>
       </header>
 
-      <div className="fc26-creator">CRIADOR <strong>FLAVIO</strong></div>
+      
 
       <section className="fc26-hero">
         {screen === "menu" ? (

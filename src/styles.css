@@ -150,8 +150,12 @@
   overflow: hidden;
   isolation: isolate;
   background:
-    linear-gradient(90deg, rgba(2, 8, 7, .98) 0%, rgba(2, 8, 7, .82) 35%, rgba(2, 8, 7, .30) 70%, rgba(2, 8, 7, .78) 100%),
-    linear-gradient(180deg, rgba(2, 8, 7, .18), rgba(2, 8, 7, .82)),
+    linear-gradient(90deg, rgba(2, 8, 7, .98) 0%, rgba(2, 8, 7, .88) 30%, rgba(2, 8, 7, .40) 68%, rgba(2, 8, 7, .82) 100%),
+    linear-gradient(180deg, rgba(2, 8, 7, .22), rgba(2, 8, 7, .88)),
+    radial-gradient(circle at 78% 24%, rgba(183, 255, 56, .22), transparent 18%),
+    radial-gradient(circle at 58% 72%, rgba(0, 217, 255, .16), transparent 24%),
+    repeating-linear-gradient(135deg, transparent 0 42px, rgba(183, 255, 56, .045) 43px 44px),
+    repeating-linear-gradient(45deg, transparent 0 70px, rgba(255, 255, 255, .035) 71px 72px),
     url("https://www.pikpng.com/pngl/m/591-5915862_neymar-brazil-png.png") center right / cover no-repeat,
     linear-gradient(135deg, #06110e 0%, #071b16 48%, #020807 100%);
   color: #f4fff9;

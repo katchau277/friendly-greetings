@@ -37,11 +37,17 @@ function Index() {
   const [sound, setSound] = useState(saved.sound ?? true);
   const [animations, setAnimations] = useState(saved.animations ?? true);
   const [compactMode, setCompactMode] = useState(saved.compactMode ?? false);
+  const [saveMessage, setSaveMessage] = useState("");
 
   useEffect(() => {
     const data: SavedCareerData = { athleteName, position, clubs, country, preferredFoot, careerSaved, playerPhoto, titles, careerClubs, seasons, games, goals, assists, cleanSheets, sound, animations, compactMode };
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch {}
   }, [athleteName, position, clubs, country, preferredFoot, careerSaved, playerPhoto, titles, careerClubs, seasons, games, goals, assists, cleanSheets, sound, animations, compactMode]);
+
+  const saveAll = () => {
+    const data: SavedCareerData = { athleteName, position, clubs, country, preferredFoot, careerSaved, playerPhoto, titles, careerClubs, seasons, games, goals, assists, cleanSheets, sound, animations, compactMode };
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); setSaveMessage("SALVO COM SUCESSO"); } catch { setSaveMessage("ERRO AO SALVAR"); }
+  };
 
   const items = [
     { label: "JOGAR", icon: Play, active: true },
@@ -161,7 +167,7 @@ function Index() {
           <div className="fc26-panel-heading"><span className="fc26-card-label">PLAYER STATS / 04</span><h2>ESTATÍSTICAS <span>DA CARREIRA</span></h2><p>Registre jogos, gols, assistências e números defensivos do seu jogador.</p></div>
           <div className="fc26-stats-grid"><label>Jogos<input type="number" min="0" value={games} onChange={(e) => setGames(e.target.value)} placeholder="0" /></label><label>Gols<input type="number" min="0" value={goals} onChange={(e) => setGoals(e.target.value)} placeholder="0" /></label><label>Assistências<input type="number" min="0" value={assists} onChange={(e) => setAssists(e.target.value)} placeholder="0" /></label><label>Clean sheets<input type="number" min="0" value={cleanSheets} onChange={(e) => setCleanSheets(e.target.value)} placeholder="0" /></label></div>
           <div className="fc26-stat-cards"><div><span>JOGADOR</span><strong>{athleteName || "A DEFINIR"}</strong></div><div><span>GOLS/JOGO</span><strong>{games && Number(games) > 0 ? (Number(goals || 0) / Number(games)).toFixed(2) : "0.00"}</strong></div><div><span>G+A</span><strong>{Number(goals || 0) + Number(assists || 0)}</strong></div><div><span>TEMPORADAS</span><strong>{seasons || "0"}</strong></div></div>
-          <button type="button" className="fc26-save-history" onClick={() => setScreen("dashboard")}>SALVAR E VOLTAR AO PERFIL <ArrowRight size={17}/></button>
+          <button type="button" className="fc26-save-history" onClick={() => { saveAll(); setScreen("dashboard"); }}>SALVAR E VOLTAR AO PERFIL <ArrowRight size={17}/></button>
         </section>
       )}
 
@@ -184,7 +190,7 @@ function Index() {
           <div className="fc26-dashboard-heading"><div><span className="fc26-card-label">PLAYER PROFILE / 02</span><h2>MINHA <span>CARREIRA</span></h2><p>Registre a história completa do seu jogador.</p></div></div>
           <div className="fc26-dashboard-grid">
             <div className="fc26-photo-panel"><div className="fc26-photo-frame">{playerPhoto ? <img src={playerPhoto} alt={athleteName} /> : <div className="fc26-photo-empty"><Upload size={30}/><strong>FOTO DO JOGADOR</strong><small>Adicione uma imagem da sua carreira</small></div>}</div><label className="fc26-upload-button"><Upload size={17}/> {playerPhoto ? "TROCAR FOTO" : "ADICIONAR FOTO"}<input type="file" accept="image/*" onChange={(event) => { const file = event.target.files?.[0]; if (file) { const reader = new FileReader(); reader.onload = () => setPlayerPhoto(String(reader.result)); reader.readAsDataURL(file); } }} /></label></div>
-            <div className="fc26-history-panel"><div className="fc26-history-title"><span>02</span><div><strong>HISTÓRICO DO JOGADOR</strong><small>TÍTULOS • CLUBES • TEMPORADAS</small></div></div><label>Clubes da carreira<input value={careerClubs} onChange={(event) => setCareerClubs(event.target.value)} placeholder="Ex.: Santos, Real Madrid, Manchester City" /></label><label>Títulos conquistados<input value={titles} onChange={(event) => setTitles(event.target.value)} placeholder="Ex.: 2x Liga dos Campeões, 1x Mundial" /></label><label>Total de temporadas<input type="number" min="0" value={seasons} onChange={(event) => setSeasons(event.target.value)} placeholder="Ex.: 8" /></label><button type="button" className="fc26-save-history" onClick={() => { localStorage.setItem(STORAGE_KEY, JSON.stringify({ athleteName, position, clubs, country, preferredFoot, careerSaved, playerPhoto, titles, careerClubs, seasons, games, goals, assists, cleanSheets, sound, animations, compactMode })); }}>SALVAR HISTÓRICO <ArrowRight size={17}/></button></div>
+            <div className="fc26-history-panel"><div className="fc26-history-title"><span>02</span><div><strong>HISTÓRICO DO JOGADOR</strong><small>TÍTULOS • CLUBES • TEMPORADAS</small></div></div><label>Clubes da carreira<input value={careerClubs} onChange={(event) => setCareerClubs(event.target.value)} placeholder="Ex.: Santos, Real Madrid, Manchester City" /></label><label>Títulos conquistados<input value={titles} onChange={(event) => setTitles(event.target.value)} placeholder="Ex.: 2x Liga dos Campeões, 1x Mundial" /></label><label>Total de temporadas<input type="number" min="0" value={seasons} onChange={(event) => setSeasons(event.target.value)} placeholder="Ex.: 8" /></label><button type="button" className="fc26-save-history" onClick={saveAll}>{saveMessage || "SALVAR HISTÓRICO"} <ArrowRight size={17}/></button></div>
           </div>
           <div className="fc26-player-summary"><div><span>ATLETA</span><strong>{athleteName}</strong></div><div><span>PAÍS</span><strong>{country}</strong></div><div><span>POSIÇÕES</span><strong>{position || "A DEFINIR"}</strong></div><div><span>PERNA</span><strong>{preferredFoot}</strong></div></div>
         </section>

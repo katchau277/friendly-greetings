@@ -16,6 +16,17 @@ function Index() {
 
   return (
     <main className="fc26-page">
+      <div className="fc26-players" aria-hidden="true">
+        <img className="fc26-player fc26-player-neymar" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Neymar_cropped_image.png" alt="" />
+        <img className="fc26-player fc26-player-ronaldo" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/C_ronaldo_cropped.png" alt="" />
+        <img className="fc26-player fc26-player-messi" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Lionel_Messi_2018.png" alt="" />
+      </div>
+
+      <div className="fc26-overlay" aria-hidden="true" />
+      <div className="fc26-grid" />
+      <div className="fc26-glow fc26-glow-one" />
+      <div className="fc26-glow fc26-glow-two" />
+
       <header className="fc26-header">
         <div className="fc26-brand">
           <span className="fc26-brand-mark">26</span>
@@ -24,25 +35,16 @@ function Index() {
             <span>ULTIMATE MENU</span>
           </div>
         </div>
-        <div className="fc26-status">
-          <span className="fc26-dot" />
-          MENU PRINCIPAL
-        </div>
+        <div className="fc26-status"><span className="fc26-dot" />MENU PRINCIPAL</div>
       </header>
 
       <section className="fc26-hero">
         <div className="fc26-kicker">THE WORLD'S GAME</div>
         <h1>FC <span>26</span></h1>
         <p>O seu futebol começa aqui.</p>
-
         <nav className="fc26-menu" aria-label="Menu principal">
           {items.map(({ label, icon: Icon, active }) => (
-            <button
-              key={label}
-              type="button"
-              className={`fc26-menu-item ${active ? "is-active" : ""}`}
-              onClick={() => undefined}
-            >
+            <button key={label} type="button" className={`fc26-menu-item ${active ? "is-active" : ""}`} onClick={() => undefined}>
               <span className="fc26-menu-icon"><Icon size={20} strokeWidth={2.4} /></span>
               <span>{label}</span>
               <ArrowRight className="fc26-arrow" size={19} />
@@ -52,9 +54,7 @@ function Index() {
       </section>
 
       <footer className="fc26-footer">
-        <span>FC 26</span>
-        <span>•</span>
-        <span>MENU TEMÁTICO</span>
+        <span>FC 26</span><span>•</span><span>MENU TEMÁTICO</span>
         <span className="fc26-footer-right">PRESS ENTER TO SELECT</span>
       </footer>
     </main>

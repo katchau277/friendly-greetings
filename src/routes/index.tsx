@@ -46,7 +46,7 @@ function Index() {
   }, [athleteName, position, clubs, country, preferredFoot, careerSaved, playerPhoto, titles, careerClubs, seasons, games, goals, assists, cleanSheets, sound, animations, compactMode]);
 
   const saveAll = () => {
-    const data: SavedCareerData = { athleteName, position, clubs, country, preferredFoot, careerSaved, playerPhoto, titles, careerClubs, seasons, games, goals, assists, cleanSheets, champions, leagues, cups, clubWorldCups, superCups, worldCups, otherTrophies, sound, animations, compactMode };
+    const data: SavedCareerData = { athleteName, position, clubs, country, preferredFoot, careerSaved, playerPhoto, titles, careerClubs, seasons, games, goals, assists, cleanSheets, sound, animations, compactMode };
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); setSaveMessage("SALVO COM SUCESSO"); } catch { setSaveMessage("ERRO AO SALVAR"); }
   };
 

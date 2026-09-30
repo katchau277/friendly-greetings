@@ -150,8 +150,9 @@
   overflow: hidden;
   isolation: isolate;
   background:
-    radial-gradient(circle at 78% 28%, rgba(45, 255, 126, 0.13), transparent 28%),
-    radial-gradient(circle at 18% 78%, rgba(0, 220, 255, 0.08), transparent 25%),
+    linear-gradient(90deg, rgba(2, 8, 7, .98) 0%, rgba(2, 8, 7, .82) 35%, rgba(2, 8, 7, .30) 70%, rgba(2, 8, 7, .78) 100%),
+    linear-gradient(180deg, rgba(2, 8, 7, .18), rgba(2, 8, 7, .82)),
+    url("https://www.pikpng.com/pngl/m/591-5915862_neymar-brazil-png.png") center right / cover no-repeat,
     linear-gradient(135deg, #06110e 0%, #071b16 48%, #020807 100%);
   color: #f4fff9;
   font-family: Inter, ui-sans-serif, system-ui, sans-serif;
@@ -161,7 +162,7 @@
   position: absolute;
   inset: 0;
   opacity: .13;
-  background-image: linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px);
+  background-image: linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
   background-size: 42px 42px;
   transform: perspective(600px) rotateX(58deg) scale(1.6);
   transform-origin: bottom;

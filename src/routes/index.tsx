@@ -16,6 +16,25 @@ function Index() {
 
   return (
     <main className="fc26-page">
+      <div className="fc26-players" aria-hidden="true">
+        <img
+          className="fc26-player fc26-player-neymar"
+          src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Neymar_cropped_image.png"
+          alt=""
+        />
+        <img
+          className="fc26-player fc26-player-ronaldo"
+          src="https://commons.wikimedia.org/wiki/Special:Redirect/file/C_ronaldo_cropped.png"
+          alt=""
+        />
+        <img
+          className="fc26-player fc26-player-messi"
+          src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Lionel_Messi_2018.png"
+          alt=""
+        />
+      </div>
+
+      <div className="fc26-overlay" aria-hidden="true" />
       <div className="fc26-grid" />
       <div className="fc26-glow fc26-glow-one" />
       <div className="fc26-glow fc26-glow-two" />

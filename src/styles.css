@@ -409,3 +409,51 @@
   .fc26-edit-career,.fc26-open-career{width:100%;justify-content:center;box-sizing:border-box}
   .fc26-footer{position:relative;bottom:auto;margin-top:20px;padding:14px 20px}
 }
+
+
+.fc26-dashboard-players .fc26-player{width:clamp(230px,26vw,410px);max-height:88vh;opacity:.46;filter:grayscale(.12) contrast(1.08) brightness(.62)}
+.fc26-dashboard-players .fc26-player-yamal{left:-4vw;bottom:-5vh}
+.fc26-dashboard-players .fc26-player-vini{left:50%;bottom:-5vh;transform:translateX(-50%) scale(1.02)}
+.fc26-dashboard-players .fc26-player-dembele{right:-4vw;bottom:-5vh}
+.fc26-dashboard{position:relative;z-index:4;width:min(1040px,calc(100% - 44px));margin:42px auto 90px}
+.fc26-dashboard-heading{margin-bottom:24px}
+.fc26-dashboard-heading h2{margin:4px 0 6px;font-size:clamp(42px,7vw,78px);line-height:.9;font-weight:950;letter-spacing:-.07em;font-style:italic}
+.fc26-dashboard-heading h2 span{color:#b7ff38}
+.fc26-dashboard-heading p{margin:0;color:#9db6ac;font-size:13px}
+.fc26-dashboard-grid{display:grid;grid-template-columns:minmax(250px,.85fr) minmax(360px,1.4fr);gap:18px}
+.fc26-photo-panel,.fc26-history-panel{background:rgba(8,24,20,.88);border:1px solid rgba(255,255,255,.1);padding:18px}
+.fc26-photo-frame{aspect-ratio:4/5;max-height:510px;background:rgba(0,0,0,.42);border:1px dashed rgba(183,255,56,.32);display:grid;place-items:center;overflow:hidden}
+.fc26-photo-frame img{width:100%;height:100%;object-fit:cover}
+.fc26-photo-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:#b7ff38;text-align:center;padding:20px}
+.fc26-photo-empty strong{font-size:11px;letter-spacing:1.8px}
+.fc26-photo-empty small{color:#60786f;font-size:9px}
+.fc26-upload-button{display:flex;align-items:center;justify-content:center;gap:8px;min-height:46px;margin-top:12px;background:#b7ff38;color:#06110e;font-size:10px;font-weight:950;letter-spacing:1.5px;cursor:pointer}
+.fc26-upload-button input{display:none}
+.fc26-history-panel{display:grid;gap:15px}
+.fc26-history-title{display:flex;align-items:center;gap:13px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.08)}
+.fc26-history-title>span{color:#b7ff38;font-size:22px;font-weight:950;font-style:italic}
+.fc26-history-title strong{display:block;font-size:11px;letter-spacing:2px}
+.fc26-history-title small{display:block;margin-top:3px;color:#60786f;font-size:7px;letter-spacing:1.5px}
+.fc26-history-panel label{display:grid;gap:7px;color:#8aa69b;font-size:9px;font-weight:900;letter-spacing:1.6px;text-transform:uppercase}
+.fc26-history-panel input{width:100%;box-sizing:border-box;height:48px;padding:0 13px;border:1px solid rgba(255,255,255,.1);background:rgba(0,0,0,.38);color:#f4fff9;outline:none;font:inherit;font-size:12px;letter-spacing:.4px}
+.fc26-history-panel input:focus{border-color:rgba(183,255,56,.65);box-shadow:0 0 0 2px rgba(183,255,56,.08)}
+.fc26-save-history{display:flex;align-items:center;justify-content:center;gap:8px;min-height:50px;border:0;background:#b7ff38;color:#06110e;font-size:10px;font-weight:950;letter-spacing:1.6px;cursor:pointer}
+.fc26-player-summary{display:grid;grid-template-columns:repeat(4,1fr);margin-top:18px;background:rgba(8,24,20,.88);border:1px solid rgba(255,255,255,.1)}
+.fc26-player-summary>div{padding:15px 17px;border-right:1px solid rgba(255,255,255,.08)}
+.fc26-player-summary>div:last-child{border-right:0}
+.fc26-player-summary span{display:block;color:#60786f;font-size:8px;font-weight:900;letter-spacing:1.5px}
+.fc26-player-summary strong{display:block;margin-top:5px;font-size:12px;color:#f4fff9}
+@media(max-width:700px){
+ .fc26-dashboard{width:calc(100% - 28px);margin:30px auto 90px}
+ .fc26-dashboard-grid{grid-template-columns:1fr}
+ .fc26-photo-frame{max-height:none}
+ .fc26-player-summary{grid-template-columns:1fr 1fr}
+ .fc26-player-summary>div:nth-child(2){border-right:0}
+ .fc26-player-summary>div{border-bottom:1px solid rgba(255,255,255,.08)}
+ .fc26-player-summary>div:nth-child(3),.fc26-player-summary>div:nth-child(4){border-bottom:0}
+ .fc26-dashboard-heading h2{font-size:clamp(38px,12vw,62px)}
+ .fc26-dashboard-players .fc26-player{width:62vw;opacity:.25}
+ .fc26-dashboard-players .fc26-player-yamal{left:-25vw}
+ .fc26-dashboard-players .fc26-player-vini{left:50%}
+ .fc26-dashboard-players .fc26-player-dembele{right:-25vw}
+}

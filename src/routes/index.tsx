@@ -95,7 +95,10 @@ function Index() {
                 <div className="fc26-career-card">
                   <div className="fc26-career-card-icon"><Trophy size={25} /></div>
                   <div><span className="fc26-card-label">ATLETA CRIADO</span><h3>{athleteName}</h3><p>{position || "POSIÇÕES A DEFINIR"}{clubs ? " • " + clubs : ""} • <span className="fc26-country-badge">{country}</span> • {preferredFoot}</p></div>
-                  <button type="button" className="fc26-open-career">ENTRAR <ArrowRight size={17} /></button>
+                  <div className="fc26-career-card-actions">
+                    <button type="button" className="fc26-edit-career" onClick={() => setCareerSaved(false)}><ArrowLeft size={16} /> EDITAR DADOS</button>
+                    <button type="button" className="fc26-open-career">ENTRAR <ArrowRight size={17} /></button>
+                  </div>
                 </div>
               )}
             </div>

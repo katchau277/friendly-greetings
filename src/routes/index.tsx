@@ -9,7 +9,9 @@ const STORAGE_KEY = "fc26-career-data";
 type SavedCareerData = {
   athleteName: string; position: string; clubs: string; country: string; preferredFoot: string;
   careerSaved: boolean; playerPhoto: string; titles: string; careerClubs: string; seasons: string;
-  games: string; goals: string; assists: string; cleanSheets: string; sound: boolean; animations: boolean; compactMode: boolean;
+  games: string; goals: string; assists: string; cleanSheets: string;
+  champions: string; leagues: string; cups: string; clubWorldCups: string; superCups: string; worldCups: string; otherTrophies: string;
+  sound: boolean; animations: boolean; compactMode: boolean;
 };
 
 function getSavedData(): Partial<SavedCareerData> {
@@ -19,7 +21,7 @@ function getSavedData(): Partial<SavedCareerData> {
 
 function Index() {
   const saved = getSavedData();
-  const [screen, setScreen] = useState<"menu" | "career" | "dashboard" | "roster" | "stats" | "settings">("menu");
+  const [screen, setScreen] = useState<"menu" | "career" | "dashboard" | "roster" | "stats" | "settings" | "trophies">("menu");
   const [athleteName, setAthleteName] = useState(saved.athleteName || "");
   const [position, setPosition] = useState(saved.position || "");
   const [clubs, setClubs] = useState(saved.clubs || "");
@@ -34,15 +36,22 @@ function Index() {
   const [goals, setGoals] = useState(saved.goals || "");
   const [assists, setAssists] = useState(saved.assists || "");
   const [cleanSheets, setCleanSheets] = useState(saved.cleanSheets || "");
+  const [champions, setChampions] = useState(saved.champions || "");
+  const [leagues, setLeagues] = useState(saved.leagues || "");
+  const [cups, setCups] = useState(saved.cups || "");
+  const [clubWorldCups, setClubWorldCups] = useState(saved.clubWorldCups || "");
+  const [superCups, setSuperCups] = useState(saved.superCups || "");
+  const [worldCups, setWorldCups] = useState(saved.worldCups || "");
+  const [otherTrophies, setOtherTrophies] = useState(saved.otherTrophies || "");
   const [sound, setSound] = useState(saved.sound ?? true);
   const [animations, setAnimations] = useState(saved.animations ?? true);
   const [compactMode, setCompactMode] = useState(saved.compactMode ?? false);
   const [saveMessage, setSaveMessage] = useState("");
 
   useEffect(() => {
-    const data: SavedCareerData = { athleteName, position, clubs, country, preferredFoot, careerSaved, playerPhoto, titles, careerClubs, seasons, games, goals, assists, cleanSheets, sound, animations, compactMode };
+    const data: SavedCareerData = { athleteName, position, clubs, country, preferredFoot, careerSaved, playerPhoto, titles, careerClubs, seasons, games, goals, assists, cleanSheets, champions, leagues, cups, clubWorldCups, superCups, worldCups, otherTrophies, sound, animations, compactMode };
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch {}
-  }, [athleteName, position, clubs, country, preferredFoot, careerSaved, playerPhoto, titles, careerClubs, seasons, games, goals, assists, cleanSheets, sound, animations, compactMode]);
+  }, [athleteName, position, clubs, country, preferredFoot, careerSaved, playerPhoto, titles, careerClubs, seasons, games, goals, assists, cleanSheets, champions, leagues, cups, clubWorldCups, superCups, worldCups, otherTrophies, sound, animations, compactMode]);
 
   const saveAll = () => {
     const data: SavedCareerData = { athleteName, position, clubs, country, preferredFoot, careerSaved, playerPhoto, titles, careerClubs, seasons, games, goals, assists, cleanSheets, sound, animations, compactMode };
@@ -54,6 +63,7 @@ function Index() {
     { label: "CARREIRA", icon: Trophy },
     { label: "ELENCO", icon: Users },
     { label: "ESTATÍSTICAS", icon: BarChart3 },
+    { label: "TROFÉUS", icon: Trophy },
     { label: "CONFIGURAÇÕES", icon: Settings },
   ];
 
@@ -87,7 +97,7 @@ function Index() {
 
       <header className="fc26-header">
         <div className="fc26-brand"><span className="fc26-brand-mark">26</span><div><strong>FC</strong><span>ULTIMATE MENU</span><small className="fc26-creator">FLAVIO</small></div></div>
-        <div className="fc26-status"><span className="fc26-dot" />{screen === "career" ? "MODO ATLETA" : screen === "dashboard" ? "PERFIL DO JOGADOR" : screen === "roster" ? "ELENCO" : screen === "stats" ? "ESTATÍSTICAS" : screen === "settings" ? "CONFIGURAÇÕES" : "MENU PRINCIPAL"}</div>
+        <div className="fc26-status"><span className="fc26-dot" />{screen === "career" ? "MODO ATLETA" : screen === "dashboard" ? "PERFIL DO JOGADOR" : screen === "roster" ? "ELENCO" : screen === "stats" ? "ESTATÍSTICAS" : screen === "settings" ? "CONFIGURAÇÕES" : screen === "trophies" ? "TROFÉUS" : "MENU PRINCIPAL"}</div>
       </header>
 
       
@@ -100,7 +110,7 @@ function Index() {
             <p>O seu futebol começa aqui.</p>
             <nav className="fc26-menu" aria-label="Menu principal">
               {items.map(({ label, icon: Icon, active }) => (
-                <button key={label} type="button" className={"fc26-menu-item " + (active ? "is-active" : "")} onClick={() => { if (label === "JOGAR" || label === "CARREIRA") setScreen("career"); if (label === "ELENCO") setScreen("roster"); if (label === "ESTATÍSTICAS") setScreen("stats"); if (label === "CONFIGURAÇÕES") setScreen("settings"); }}>
+                <button key={label} type="button" className={"fc26-menu-item " + (active ? "is-active" : "")} onClick={() => { if (label === "JOGAR" || label === "CARREIRA") setScreen("career"); if (label === "ELENCO") setScreen("roster"); if (label === "ESTATÍSTICAS") setScreen("stats"); if (label === "TROFÉUS") setScreen("trophies"); if (label === "CONFIGURAÇÕES") setScreen("settings"); }}>
                   <span className="fc26-menu-icon"><Icon size={20} strokeWidth={2.4} /></span><span>{label}</span><ArrowRight className="fc26-arrow" size={19} />
                 </button>
               ))}
@@ -168,6 +178,33 @@ function Index() {
           <div className="fc26-stats-grid"><label>Jogos<input type="number" min="0" value={games} onChange={(e) => setGames(e.target.value)} placeholder="0" /></label><label>Gols<input type="number" min="0" value={goals} onChange={(e) => setGoals(e.target.value)} placeholder="0" /></label><label>Assistências<input type="number" min="0" value={assists} onChange={(e) => setAssists(e.target.value)} placeholder="0" /></label><label>Clean sheets<input type="number" min="0" value={cleanSheets} onChange={(e) => setCleanSheets(e.target.value)} placeholder="0" /></label></div>
           <div className="fc26-stat-cards"><div><span>JOGADOR</span><strong>{athleteName || "A DEFINIR"}</strong></div><div><span>GOLS/JOGO</span><strong>{games && Number(games) > 0 ? (Number(goals || 0) / Number(games)).toFixed(2) : "0.00"}</strong></div><div><span>G+A</span><strong>{Number(goals || 0) + Number(assists || 0)}</strong></div><div><span>TEMPORADAS</span><strong>{seasons || "0"}</strong></div></div>
           <button type="button" className="fc26-save-history" onClick={() => { saveAll(); setScreen("dashboard"); }}>SALVAR E VOLTAR AO PERFIL <ArrowRight size={17}/></button>
+        </section>
+      )}
+
+
+      {screen === "trophies" && (
+        <section className="fc26-panel-page fc26-trophies-page">
+          <button type="button" className="fc26-back" onClick={() => setScreen("menu")}><ArrowLeft size={17} /> VOLTAR AO MENU</button>
+          <div className="fc26-panel-heading"><span className="fc26-card-label">TROPHIES / 06</span><h2>MEUS <span>TROFÉUS</span></h2><p>Registre quantas vezes seu jogador conquistou cada competição.</p></div>
+          <div className="fc26-trophy-grid">
+            {[
+              ["CHAMPIONS LEAGUE", champions, setChampions, "Champions"],
+              ["LIGAS NACIONAIS", leagues, setLeagues, "Liga"],
+              ["COPAS NACIONAIS", cups, setCups, "Copa"],
+              ["MUNDIAL DE CLUBES", clubWorldCups, setClubWorldCups, "Mundial"],
+              ["SUPERCOPAS", superCups, setSuperCups, "Supercopa"],
+              ["COPA DO MUNDO", worldCups, setWorldCups, "Mundial"],
+              ["OUTROS", otherTrophies, setOtherTrophies, "Outros"],
+            ].map(([label, value, setter, iconLabel]) => (
+              <label key={String(label)} className="fc26-trophy-card">
+                <span className="fc26-trophy-icon"><Trophy size={22}/></span>
+                <span className="fc26-trophy-name">{String(label)}</span>
+                <input type="number" min="0" value={String(value)} onChange={(e) => (setter as React.Dispatch<React.SetStateAction<string>>)(e.target.value)} placeholder="0" aria-label={String(iconLabel)} />
+                <small>CONQUISTADOS</small>
+              </label>
+            ))}
+          </div>
+          <button type="button" className="fc26-save-history fc26-trophy-save" onClick={saveAll}>SALVAR TROFÉUS <ArrowRight size={17}/></button>
         </section>
       )}
 

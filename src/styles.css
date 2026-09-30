@@ -381,3 +381,11 @@
 }
 .fc26-career-form select:focus { border-color:rgba(183,255,56,.65); box-shadow:0 0 0 2px rgba(183,255,56,.08); }
 .fc26-career-form option { background:#081814; color:#f4fff9; }
+
+
+.fc26-career-players .fc26-player{width:clamp(220px,25vw,390px);max-height:88vh;opacity:.68;filter:grayscale(.08) contrast(1.08) brightness(.74)}
+.fc26-player-yamal{left:-2vw;bottom:-3vh;transform:scale(1.05)}
+.fc26-player-vini{left:50%;bottom:-4vh;transform:translateX(-50%) scale(1.08)}
+.fc26-player-dembele{right:-2vw;bottom:-3vh;transform:scale(1.05)}
+.fc26-country-badge{color:#f4fff9;font-size:12px;letter-spacing:.2px}
+@media (max-width:600px){.fc26-career-players .fc26-player{width:64vw;opacity:.48}.fc26-player-yamal{left:-23vw}.fc26-player-vini{left:50%}.fc26-player-dembele{right:-23vw}}

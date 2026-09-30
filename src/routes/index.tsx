@@ -1,11 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { ArrowRight, Trophy, Users, BarChart3, Settings, Play, Plus, ArrowLeft, Upload, Medal, Shield } from "lucide-react";
+import { ArrowRight, Trophy, Users, BarChart3, Settings, Play, Plus, ArrowLeft, Upload, Shield } from "lucide-react";
 
 export const Route = createFileRoute("/")({ component: Index });
 
 function Index() {
-  const [screen, setScreen] = useState<"menu" | "career" | "dashboard">("menu");
+  const [screen, setScreen] = useState<"menu" | "career" | "dashboard" | "roster" | "stats" | "settings">("menu");
   const [athleteName, setAthleteName] = useState("");
   const [position, setPosition] = useState("");
   const [clubs, setClubs] = useState("");
@@ -16,6 +16,13 @@ function Index() {
   const [titles, setTitles] = useState("");
   const [careerClubs, setCareerClubs] = useState(clubs);
   const [seasons, setSeasons] = useState("");
+  const [games, setGames] = useState("");
+  const [goals, setGoals] = useState("");
+  const [assists, setAssists] = useState("");
+  const [cleanSheets, setCleanSheets] = useState("");
+  const [sound, setSound] = useState(true);
+  const [animations, setAnimations] = useState(true);
+  const [compactMode, setCompactMode] = useState(false);
 
   const items = [
     { label: "JOGAR", icon: Play, active: true },
@@ -55,7 +62,7 @@ function Index() {
 
       <header className="fc26-header">
         <div className="fc26-brand"><span className="fc26-brand-mark">26</span><div><strong>FC</strong><span>ULTIMATE MENU</span></div></div>
-        <div className="fc26-status"><span className="fc26-dot" />{screen === "career" ? "MODO ATLETA" : "MENU PRINCIPAL"}</div>
+        <div className="fc26-status"><span className="fc26-dot" />{screen === "career" ? "MODO ATLETA" : screen === "dashboard" ? "PERFIL DO JOGADOR" : screen === "roster" ? "ELENCO" : screen === "stats" ? "ESTATÍSTICAS" : screen === "settings" ? "CONFIGURAÇÕES" : "MENU PRINCIPAL"}</div>
       </header>
 
       <section className="fc26-hero">
@@ -66,7 +73,7 @@ function Index() {
             <p>O seu futebol começa aqui.</p>
             <nav className="fc26-menu" aria-label="Menu principal">
               {items.map(({ label, icon: Icon, active }) => (
-                <button key={label} type="button" className={"fc26-menu-item " + (active ? "is-active" : "")} onClick={() => label === "JOGAR" && setScreen("career")}>
+                <button key={label} type="button" className={"fc26-menu-item " + (active ? "is-active" : "")} onClick={() => { if (label === "JOGAR" || label === "CARREIRA") setScreen("career"); if (label === "ELENCO") setScreen("roster"); if (label === "ESTATÍSTICAS") setScreen("stats"); if (label === "CONFIGURAÇÕES") setScreen("settings"); }}>
                   <span className="fc26-menu-icon"><Icon size={20} strokeWidth={2.4} /></span><span>{label}</span><ArrowRight className="fc26-arrow" size={19} />
                 </button>
               ))}
@@ -115,6 +122,56 @@ function Index() {
           </>
         )}
       </section>
+
+      {screen === "roster" && (
+        <section className="fc26-panel-page">
+          <button type="button" className="fc26-back" onClick={() => setScreen("menu")}><ArrowLeft size={17} /> VOLTAR AO MENU</button>
+          <div className="fc26-panel-heading"><span className="fc26-card-label">SQUAD / 03</span><h2>MEU <span>ELENCO</span></h2><p>Organize os jogadores da sua carreira e acompanhe o elenco.</p></div>
+          <div className="fc26-roster-grid">
+            <div className="fc26-roster-card fc26-roster-main">
+              <div className="fc26-roster-number">01</div>
+              <div><span>JOGADOR PRINCIPAL</span><strong>{athleteName || "NENHUM JOGADOR CRIADO"}</strong><small>{position || "POSIÇÃO A DEFINIR"} • {country || "PAÍS A DEFINIR"}</small></div>
+              <button type="button" onClick={() => setScreen(careerSaved ? "dashboard" : "career")}>{careerSaved ? "ABRIR PERFIL" : "CRIAR JOGADOR"} <ArrowRight size={16}/></button>
+            </div>
+            <div className="fc26-roster-card"><Users size={24}/><div><span>ELENCO ATUAL</span><strong>{athleteName ? "1 JOGADOR" : "0 JOGADORES"}</strong><small>Adicione mais jogadores em futuras carreiras</small></div></div>
+            <div className="fc26-roster-card"><Shield size={24}/><div><span>CLUBE</span><strong>{careerClubs || clubs || "NÃO DEFINIDO"}</strong><small>Clube atual da carreira</small></div></div>
+            <div className="fc26-roster-card"><Trophy size={24}/><div><span>TÍTULOS</span><strong>{titles || "NENHUM REGISTRADO"}</strong><small>Conquistas cadastradas no perfil</small></div></div>
+          </div>
+        </section>
+      )}
+
+      {screen === "stats" && (
+        <section className="fc26-panel-page">
+          <button type="button" className="fc26-back" onClick={() => setScreen("menu")}><ArrowLeft size={17} /> VOLTAR AO MENU</button>
+          <div className="fc26-panel-heading"><span className="fc26-card-label">PLAYER STATS / 04</span><h2>ESTATÍSTICAS <span>DA CARREIRA</span></h2><p>Registre jogos, gols, assistências e números defensivos do seu jogador.</p></div>
+          <div className="fc26-stats-grid">
+            <label>Jogos<input type="number" min="0" value={games} onChange={(e) => setGames(e.target.value)} placeholder="0" /></label>
+            <label>Gols<input type="number" min="0" value={goals} onChange={(e) => setGoals(e.target.value)} placeholder="0" /></label>
+            <label>Assistências<input type="number" min="0" value={assists} onChange={(e) => setAssists(e.target.value)} placeholder="0" /></label>
+            <label>Clean sheets<input type="number" min="0" value={cleanSheets} onChange={(e) => setCleanSheets(e.target.value)} placeholder="0" /></label>
+          </div>
+          <div className="fc26-stat-cards">
+            <div><span>JOGADOR</span><strong>{athleteName || "A DEFINIR"}</strong></div>
+            <div><span>GOLS/JOGO</span><strong>{games && Number(games) > 0 ? (Number(goals || 0) / Number(games)).toFixed(2) : "0.00"}</strong></div>
+            <div><span>G+A</span><strong>{Number(goals || 0) + Number(assists || 0)}</strong></div>
+            <div><span>TEMPORADAS</span><strong>{seasons || "0"}</strong></div>
+          </div>
+          <button type="button" className="fc26-save-history" onClick={() => setScreen("dashboard")}>SALVAR E VOLTAR AO PERFIL <ArrowRight size={17}/></button>
+        </section>
+      )}
+
+      {screen === "settings" && (
+        <section className="fc26-panel-page">
+          <button type="button" className="fc26-back" onClick={() => setScreen("menu")}><ArrowLeft size={17} /> VOLTAR AO MENU</button>
+          <div className="fc26-panel-heading"><span className="fc26-card-label">SYSTEM / 05</span><h2>CONFIGURA<span>ÇÕES</span></h2><p>Personalize a experiência do seu menu FC 26.</p></div>
+          <div className="fc26-settings-list">
+            <button type="button" className="fc26-setting-row" onClick={() => setSound(!sound)}><div><strong>SOM DA INTERFACE</strong><small>Ativa ou desativa sons da navegação</small></div><span className={sound ? "is-on" : ""}>{sound ? "ATIVO" : "OFF"}</span></button>
+            <button type="button" className="fc26-setting-row" onClick={() => setAnimations(!animations)}><div><strong>ANIMAÇÕES</strong><small>Controla transições e efeitos visuais</small></div><span className={animations ? "is-on" : ""}>{animations ? "ATIVO" : "OFF"}</span></button>
+            <button type="button" className="fc26-setting-row" onClick={() => setCompactMode(!compactMode)}><div><strong>MODO COMPACTO</strong><small>Reduz espaços para facilitar o uso em telas menores</small></div><span className={compactMode ? "is-on" : ""}>{compactMode ? "ATIVO" : "OFF"}</span></button>
+          </div>
+          <div className="fc26-settings-note"><Settings size={20}/><div><strong>CONFIGURAÇÃO LOCAL</strong><small>Estas preferências ficam ativas enquanto a página estiver aberta.</small></div></div>
+        </section>
+      )}
 
       {screen === "dashboard" && (
         <section className="fc26-dashboard">

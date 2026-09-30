@@ -142,3 +142,117 @@
     color: var(--color-foreground);
   }
 }
+
+/* FC 26 menu */
+.fc26-page {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 78% 28%, rgba(45, 255, 126, 0.13), transparent 28%),
+    radial-gradient(circle at 18% 78%, rgba(0, 220, 255, 0.08), transparent 25%),
+    linear-gradient(135deg, #06110e 0%, #071b16 48%, #020807 100%);
+  color: #f4fff9;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+.fc26-grid {
+  position: absolute;
+  inset: 0;
+  opacity: .13;
+  background-image: linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px);
+  background-size: 42px 42px;
+  transform: perspective(600px) rotateX(58deg) scale(1.6);
+  transform-origin: bottom;
+  z-index: -1;
+}
+
+.fc26-glow {
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: .22;
+  z-index: -1;
+}
+.fc26-glow-one { background: #2cff82; right: -180px; top: 20%; }
+.fc26-glow-two { background: #00d9ff; left: -220px; bottom: -180px; }
+
+.fc26-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px clamp(22px, 5vw, 72px);
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.fc26-brand { display:flex; align-items:center; gap:12px; }
+.fc26-brand-mark {
+  display:grid; place-items:center; width:42px; height:42px;
+  background:#b7ff38; color:#06110e; font-weight:950; font-size:15px;
+  transform:skew(-10deg);
+}
+.fc26-brand strong { display:block; font-size:23px; line-height:18px; letter-spacing:-1px; }
+.fc26-brand span:last-child { display:block; color:#8aa69b; font-size:8px; letter-spacing:2px; margin-top:4px; }
+.fc26-status { color:#8aa69b; font-size:10px; font-weight:800; letter-spacing:2px; display:flex; align-items:center; gap:8px; }
+.fc26-dot { width:7px; height:7px; border-radius:50%; background:#b7ff38; box-shadow:0 0 14px #b7ff38; }
+
+.fc26-hero {
+  width:min(760px, calc(100% - 44px));
+  margin: clamp(55px, 10vh, 105px) auto 60px;
+}
+.fc26-kicker { color:#b7ff38; font-size:11px; font-weight:900; letter-spacing:4px; margin-bottom:10px; }
+.fc26-hero h1 {
+  margin:0;
+  font-size:clamp(82px, 17vw, 190px);
+  line-height:.76;
+  font-weight:950;
+  letter-spacing:-.09em;
+  font-style:italic;
+  text-transform:uppercase;
+  text-shadow: 7px 7px 0 rgba(183,255,56,.08);
+}
+.fc26-hero h1 span { color:#b7ff38; }
+.fc26-hero p { margin:28px 0 38px; color:#9db6ac; font-size:15px; }
+
+.fc26-menu { display:grid; gap:9px; width:min(530px, 100%); }
+.fc26-menu-item {
+  position:relative;
+  display:flex; align-items:center; gap:15px;
+  width:100%; min-height:58px; padding:0 18px;
+  border:1px solid rgba(255,255,255,.09);
+  background:rgba(8,24,20,.76);
+  color:#dcebe5; text-align:left; cursor:pointer;
+  font-size:12px; font-weight:900; letter-spacing:1.8px;
+  transition:transform .2s ease, background .2s ease, border-color .2s ease;
+}
+.fc26-menu-item:hover, .fc26-menu-item:focus-visible {
+  transform:translateX(9px);
+  background:rgba(183,255,56,.12);
+  border-color:rgba(183,255,56,.55);
+  outline:none;
+}
+.fc26-menu-item.is-active {
+  background:#b7ff38; color:#06110e; border-color:#b7ff38;
+  box-shadow:14px 0 0 rgba(183,255,56,.08);
+}
+.fc26-menu-icon { display:grid; place-items:center; width:32px; }
+.fc26-arrow { margin-left:auto; opacity:.45; }
+.fc26-menu-item.is-active .fc26-arrow { opacity:1; }
+
+.fc26-footer {
+  position:absolute; left:0; right:0; bottom:0;
+  display:flex; gap:10px; align-items:center; padding:18px clamp(22px,5vw,72px);
+  color:#60786f; border-top:1px solid rgba(255,255,255,.07);
+  font-size:9px; font-weight:800; letter-spacing:1.7px;
+}
+.fc26-footer-right { margin-left:auto; color:#849d93; }
+
+@media (max-width: 600px) {
+  .fc26-status { display:none; }
+  .fc26-header { padding-top:20px; padding-bottom:20px; }
+  .fc26-hero { margin-top:70px; }
+  .fc26-hero h1 { font-size:92px; }
+  .fc26-footer-right { display:none; }
+}

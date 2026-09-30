@@ -2,13 +2,10 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { ArrowRight, Trophy, Users, BarChart3, Settings, Play, Plus, ArrowLeft } from "lucide-react";
 
-export const Route = createFileRoute("/")({
-  component: Index,
-});
+export const Route = createFileRoute("/")({ component: Index });
 
 function Index() {
   const [screen, setScreen] = useState<"menu" | "career">("menu");
-  const [careerName, setCareerName] = useState("");
   const [athleteName, setAthleteName] = useState("");
   const [position, setPosition] = useState("");
   const [club, setClub] = useState("");
@@ -29,18 +26,14 @@ function Index() {
         <img className="fc26-player fc26-player-ronaldo" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/C_ronaldo_cropped.png" alt="" />
         <img className="fc26-player fc26-player-messi" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Lionel_Messi_2018.png" alt="" />
       </div>
-
       <div className="fc26-overlay" aria-hidden="true" />
       <div className="fc26-grid" />
       <div className="fc26-glow fc26-glow-one" />
       <div className="fc26-glow fc26-glow-two" />
 
       <header className="fc26-header">
-        <div className="fc26-brand">
-          <span className="fc26-brand-mark">26</span>
-          <div><strong>FC</strong><span>ULTIMATE MENU</span></div>
-        </div>
-        <div className="fc26-status"><span className="fc26-dot" />{screen === "career" ? "MODO CARREIRA" : "MENU PRINCIPAL"}</div>
+        <div className="fc26-brand"><span className="fc26-brand-mark">26</span><div><strong>FC</strong><span>ULTIMATE MENU</span></div></div>
+        <div className="fc26-status"><span className="fc26-dot" />{screen === "career" ? "MODO ATLETA" : "MENU PRINCIPAL"}</div>
       </header>
 
       <section className="fc26-hero">
@@ -51,10 +44,8 @@ function Index() {
             <p>O seu futebol começa aqui.</p>
             <nav className="fc26-menu" aria-label="Menu principal">
               {items.map(({ label, icon: Icon, active }) => (
-                <button key={label} type="button" className={`fc26-menu-item ${active ? "is-active" : ""}`} onClick={() => label === "JOGAR" && setScreen("career")}>
-                  <span className="fc26-menu-icon"><Icon size={20} strokeWidth={2.4} /></span>
-                  <span>{label}</span>
-                  <ArrowRight className="fc26-arrow" size={19} />
+                <button key={label} type="button" className={"fc26-menu-item " + (active ? "is-active" : "")} onClick={() => label === "JOGAR" && setScreen("career")}>
+                  <span className="fc26-menu-icon"><Icon size={20} strokeWidth={2.4} /></span><span>{label}</span><ArrowRight className="fc26-arrow" size={19} />
                 </button>
               ))}
             </nav>
@@ -62,35 +53,41 @@ function Index() {
         ) : (
           <>
             <button type="button" className="fc26-back" onClick={() => setScreen("menu")}><ArrowLeft size={17} /> VOLTAR AO MENU</button>
-            <div className="fc26-kicker">MODO CARREIRA</div>
-            <h2 className="fc26-career-title">MINHA <span>CARREIRA</span></h2>
-            <p className="fc26-career-subtitle">Crie a carreira do seu atleta e acompanhe a evolução dele no FC 26.</p>
+            <div className="fc26-kicker">PLAYER CAREER / 01</div>
 
-            {!careerSaved ? (
-              <form className="fc26-career-form" onSubmit={(event) => { event.preventDefault(); setCareerSaved(true); }}>
-                <label>Nome da carreira<input value={careerName} onChange={(event) => setCareerName(event.target.value)} placeholder="Ex.: Minha carreira FC 26" required /></label>
-                <label>Nome do atleta<input value={athleteName} onChange={(event) => setAthleteName(event.target.value)} placeholder="Ex.: Arthur Alves" required /></label>
-                <div className="fc26-form-row">
-                  <label>Posição<input value={position} onChange={(event) => setPosition(event.target.value)} placeholder="Ex.: ATA" /></label>
-                  <label>Clube<input value={club} onChange={(event) => setClub(event.target.value)} placeholder="Ex.: Real Madrid" /></label>
+            <div className="fc26-career-layout">
+              <div className="fc26-career-intro">
+                <div className="fc26-player-badge"><span>PLAYER</span><strong>01</strong></div>
+                <div>
+                  <span className="fc26-card-label">CREATE YOUR PLAYER</span>
+                  <h2 className="fc26-career-title">MODO <span>ATLETA</span></h2>
+                  <p className="fc26-career-subtitle">Monte seu jogador, escolha onde começar e entre em campo.</p>
                 </div>
-                <button className="fc26-create-career" type="submit"><Plus size={19} /> CRIAR CARREIRA</button>
-              </form>
-            ) : (
-              <div className="fc26-career-card">
-                <div className="fc26-career-card-icon"><Trophy size={25} /></div>
-                <div><span className="fc26-card-label">CARREIRA CRIADA</span><h3>{careerName}</h3><p>{athleteName}{position ? ` • ${position}` : ""}{club ? ` • ${club}` : ""}</p></div>
-                <button type="button" className="fc26-open-career">ABRIR <ArrowRight size={17} /></button>
               </div>
-            )}
+
+              {!careerSaved ? (
+                <form className="fc26-career-form" onSubmit={(event) => { event.preventDefault(); setCareerSaved(true); }}>
+                  <div className="fc26-form-heading"><span>01</span><div><strong>DADOS DO ATLETA</strong><small>PERSONALIZE O SEU JOGADOR</small></div></div>
+                  <label>Nome do atleta<input value={athleteName} onChange={(event) => setAthleteName(event.target.value)} placeholder="Ex.: Arthur Alves" required /></label>
+                  <div className="fc26-form-row">
+                    <label>Posição<input value={position} onChange={(event) => setPosition(event.target.value)} placeholder="Ex.: ATA" /></label>
+                    <label>Clube inicial<input value={club} onChange={(event) => setClub(event.target.value)} placeholder="Ex.: Real Madrid" /></label>
+                  </div>
+                  <button className="fc26-create-career" type="submit"><Plus size={19} /> COMEÇAR CARREIRA</button>
+                </form>
+              ) : (
+                <div className="fc26-career-card">
+                  <div className="fc26-career-card-icon"><Trophy size={25} /></div>
+                  <div><span className="fc26-card-label">ATLETA CRIADO</span><h3>{athleteName}</h3><p>{position || "POSIÇÃO A DEFINIR"}{club ? " • " + club : ""}</p></div>
+                  <button type="button" className="fc26-open-career">ENTRAR <ArrowRight size={17} /></button>
+                </div>
+              )}
+            </div>
           </>
         )}
       </section>
 
-      <footer className="fc26-footer">
-        <span>FC 26</span><span>•</span><span>MENU TEMÁTICO</span>
-        <span className="fc26-footer-right">PRESS ENTER TO SELECT</span>
-      </footer>
+      <footer className="fc26-footer"><span>FC 26</span><span>•</span><span>PLAYER CAREER</span><span className="fc26-footer-right">PRESS ENTER TO SELECT</span></footer>
     </main>
   );
 }

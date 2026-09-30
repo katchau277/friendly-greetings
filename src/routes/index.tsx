@@ -23,10 +23,20 @@ function Index() {
 
   return (
     <main className="fc26-page">
-      <div className="fc26-players" aria-hidden="true">
-        <img className="fc26-player fc26-player-neymar" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Neymar_cropped_image.png" alt="" />
-        <img className="fc26-player fc26-player-ronaldo" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/C_ronaldo_cropped.png" alt="" />
-        <img className="fc26-player fc26-player-messi" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Lionel_Messi_2018.png" alt="" />
+      <div className={"fc26-players " + (screen === "career" ? "fc26-career-players" : "fc26-menu-players")} aria-hidden="true">
+        {screen === "menu" ? (
+          <>
+            <img className="fc26-player fc26-player-neymar" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Neymar_cropped_image.png" alt="" />
+            <img className="fc26-player fc26-player-ronaldo" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/C_ronaldo_cropped.png" alt="" />
+            <img className="fc26-player fc26-player-messi" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Lionel_Messi_2018.png" alt="" />
+          </>
+        ) : (
+          <>
+            <img className="fc26-player fc26-player-yamal" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Lamine_Yamal_in_2025.jpg" alt="" />
+            <img className="fc26-player fc26-player-vini" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Vinicius_Junior_(2025).jpg" alt="" />
+            <img className="fc26-player fc26-player-dembele" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Ousmane_Dembele_France_v_Morocco_9_July_2026-185.jpg" alt="" />
+          </>
+        )}
       </div>
       <div className="fc26-overlay" aria-hidden="true" />
       <div className="fc26-grid" />
@@ -84,7 +94,7 @@ function Index() {
               ) : (
                 <div className="fc26-career-card">
                   <div className="fc26-career-card-icon"><Trophy size={25} /></div>
-                  <div><span className="fc26-card-label">ATLETA CRIADO</span><h3>{athleteName}</h3><p>{position || "POSIÇÕES A DEFINIR"}{clubs ? " • " + clubs : ""} • {country} • {preferredFoot}</p></div>
+                  <div><span className="fc26-card-label">ATLETA CRIADO</span><h3>{athleteName}</h3><p>{position || "POSIÇÕES A DEFINIR"}{clubs ? " • " + clubs : ""} • <span className="fc26-country-badge">{country}</span> • {preferredFoot}</p></div>
                   <button type="button" className="fc26-open-career">ENTRAR <ArrowRight size={17} /></button>
                 </div>
               )}

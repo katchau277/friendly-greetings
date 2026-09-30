@@ -290,3 +290,71 @@
   .fc26-player-ronaldo { left:50%; }
   .fc26-player-messi { right:-22vw; }
 }
+
+.fc26-back {
+  display:flex; align-items:center; gap:8px;
+  border:0; background:transparent; color:#8aa69b;
+  font-size:10px; font-weight:900; letter-spacing:1.8px;
+  cursor:pointer; margin-bottom:22px; padding:0;
+}
+.fc26-back:hover { color:#b7ff38; }
+
+.fc26-career-title {
+  margin:0; font-size:clamp(48px, 8vw, 86px); line-height:.9;
+  font-weight:950; letter-spacing:-.07em; font-style:italic;
+}
+.fc26-career-title span { color:#b7ff38; }
+.fc26-career-subtitle { max-width:600px; margin:18px 0 26px; color:#9db6ac; font-size:14px; line-height:1.6; }
+
+.fc26-career-form {
+  width:min(620px, 100%); display:grid; gap:14px;
+  padding:22px; background:rgba(8,24,20,.78);
+  border:1px solid rgba(255,255,255,.1);
+  box-shadow:0 20px 60px rgba(0,0,0,.28);
+}
+.fc26-career-form label {
+  display:grid; gap:7px; color:#8aa69b;
+  font-size:9px; font-weight:900; letter-spacing:1.6px; text-transform:uppercase;
+}
+.fc26-career-form input {
+  width:100%; box-sizing:border-box; height:46px; padding:0 13px;
+  border:1px solid rgba(255,255,255,.1); background:rgba(0,0,0,.38);
+  color:#f4fff9; outline:none; font:inherit; font-size:12px; letter-spacing:.4px;
+}
+.fc26-career-form input:focus { border-color:rgba(183,255,56,.65); box-shadow:0 0 0 2px rgba(183,255,56,.08); }
+.fc26-career-form input::placeholder { color:#50665e; }
+.fc26-form-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+
+.fc26-create-career {
+  display:flex; align-items:center; justify-content:center; gap:9px;
+  min-height:50px; margin-top:4px; border:0;
+  background:#b7ff38; color:#06110e; cursor:pointer;
+  font-size:11px; font-weight:950; letter-spacing:1.8px;
+}
+.fc26-create-career:hover { filter:brightness(1.08); transform:translateY(-1px); }
+
+.fc26-career-card {
+  width:min(650px, 100%); box-sizing:border-box;
+  display:flex; align-items:center; gap:16px; padding:20px;
+  background:rgba(8,24,20,.84); border:1px solid rgba(183,255,56,.3);
+}
+.fc26-career-card-icon {
+  flex:none; display:grid; place-items:center; width:52px; height:52px;
+  background:#b7ff38; color:#06110e;
+}
+.fc26-card-label { color:#b7ff38; font-size:8px; font-weight:900; letter-spacing:2px; }
+.fc26-career-card h3 { margin:5px 0 4px; font-size:18px; }
+.fc26-career-card p { margin:0; color:#8aa69b; font-size:11px; }
+.fc26-open-career {
+  display:flex; align-items:center; gap:7px; margin-left:auto;
+  border:1px solid rgba(255,255,255,.12); background:transparent;
+  color:#dcebe5; padding:11px 13px; cursor:pointer;
+  font-size:9px; font-weight:900; letter-spacing:1.4px;
+}
+.fc26-open-career:hover { border-color:#b7ff38; color:#b7ff38; }
+
+@media (max-width: 600px) {
+  .fc26-form-row { grid-template-columns:1fr; }
+  .fc26-career-card { align-items:flex-start; flex-wrap:wrap; }
+  .fc26-open-career { margin-left:0; width:100%; justify-content:center; }
+}

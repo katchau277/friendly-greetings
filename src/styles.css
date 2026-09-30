@@ -389,3 +389,23 @@
 .fc26-player-dembele{right:-2vw;bottom:-3vh;transform:scale(1.05)}
 .fc26-country-badge{color:#f4fff9;font-size:12px;letter-spacing:.2px}
 @media (max-width:600px){.fc26-career-players .fc26-player{width:64vw;opacity:.48}.fc26-player-yamal{left:-23vw}.fc26-player-vini{left:50%}.fc26-player-dembele{right:-23vw}}
+
+
+.fc26-career-card-actions{display:flex;align-items:center;gap:9px;margin-left:auto}
+.fc26-edit-career{display:flex;align-items:center;gap:6px;border:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.18);color:#8aa69b;padding:11px 12px;cursor:pointer;font-size:9px;font-weight:900;letter-spacing:1.2px}
+.fc26-edit-career:hover{border-color:rgba(183,255,56,.55);color:#b7ff38}
+@media (max-width:600px){
+  .fc26-page{min-height:100dvh;overflow-x:hidden;overflow-y:auto}
+  .fc26-hero{width:calc(100% - 28px);margin:42px auto 90px}
+  .fc26-career-layout{width:100%}
+  .fc26-career-form{padding:16px;gap:13px}
+  .fc26-career-intro{gap:13px;margin-bottom:20px}
+  .fc26-career-title{font-size:clamp(40px,13vw,64px)}
+  .fc26-career-subtitle{font-size:12px;margin:12px 0 18px}
+  .fc26-career-card{padding:15px;gap:12px}
+  .fc26-career-card h3{font-size:17px}
+  .fc26-career-card p{line-height:1.7}
+  .fc26-career-card-actions{width:100%;margin-left:0;display:grid;grid-template-columns:1fr 1fr}
+  .fc26-edit-career,.fc26-open-career{width:100%;justify-content:center;box-sizing:border-box}
+  .fc26-footer{position:relative;bottom:auto;margin-top:20px;padding:14px 20px}
+}

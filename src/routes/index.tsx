@@ -8,7 +8,9 @@ function Index() {
   const [screen, setScreen] = useState<"menu" | "career">("menu");
   const [athleteName, setAthleteName] = useState("");
   const [position, setPosition] = useState("");
-  const [club, setClub] = useState("");
+  const [clubs, setClubs] = useState("");
+  const [country, setCountry] = useState("");
+  const [preferredFoot, setPreferredFoot] = useState("");
   const [careerSaved, setCareerSaved] = useState(false);
 
   const items = [
@@ -70,15 +72,19 @@ function Index() {
                   <div className="fc26-form-heading"><span>01</span><div><strong>DADOS DO ATLETA</strong><small>PERSONALIZE O SEU JOGADOR</small></div></div>
                   <label>Nome do atleta<input value={athleteName} onChange={(event) => setAthleteName(event.target.value)} placeholder="Ex.: Arthur Alves" required /></label>
                   <div className="fc26-form-row">
-                    <label>Posição<input value={position} onChange={(event) => setPosition(event.target.value)} placeholder="Ex.: ATA" /></label>
-                    <label>Clube inicial<input value={club} onChange={(event) => setClub(event.target.value)} placeholder="Ex.: Real Madrid" /></label>
+                    <label>Posições<input value={position} onChange={(event) => setPosition(event.target.value)} placeholder="Ex.: ATA / PD / PE" /></label>
+                    <label>Clubes<input value={clubs} onChange={(event) => setClubs(event.target.value)} placeholder="Ex.: Real Madrid" /></label>
+                  </div>
+                  <div className="fc26-form-row">
+                    <label>País<select value={country} onChange={(event) => setCountry(event.target.value)} required><option value="">Selecione o país</option><option value="🇧🇷 Brasil">🇧🇷 Brasil</option><option value="🇵🇹 Portugal">🇵🇹 Portugal</option><option value="🇦🇷 Argentina">🇦🇷 Argentina</option><option value="🇪🇸 Espanha">🇪🇸 Espanha</option><option value="🇫🇷 França">🇫🇷 França</option><option value="🇬🇧 Inglaterra">🇬🇧 Inglaterra</option><option value="🇩🇪 Alemanha">🇩🇪 Alemanha</option><option value="🇮🇹 Itália">🇮🇹 Itália</option><option value="🇺🇸 Estados Unidos">🇺🇸 Estados Unidos</option><option value="🇳🇱 Holanda">🇳🇱 Holanda</option><option value="🇧🇪 Bélgica">🇧🇪 Bélgica</option><option value="🇺🇾 Uruguai">🇺🇾 Uruguai</option></select></label>
+                    <label>Perna boa<select value={preferredFoot} onChange={(event) => setPreferredFoot(event.target.value)} required><option value="">Selecione</option><option value="Direita">Direita</option><option value="Esquerda">Esquerda</option><option value="Ambidestro">Ambidestro</option></select></label>
                   </div>
                   <button className="fc26-create-career" type="submit"><Plus size={19} /> COMEÇAR CARREIRA</button>
                 </form>
               ) : (
                 <div className="fc26-career-card">
                   <div className="fc26-career-card-icon"><Trophy size={25} /></div>
-                  <div><span className="fc26-card-label">ATLETA CRIADO</span><h3>{athleteName}</h3><p>{position || "POSIÇÃO A DEFINIR"}{club ? " • " + club : ""}</p></div>
+                  <div><span className="fc26-card-label">ATLETA CRIADO</span><h3>{athleteName}</h3><p>{position || "POSIÇÕES A DEFINIR"}{clubs ? " • " + clubs : ""} • {country} • {preferredFoot}</p></div>
                   <button type="button" className="fc26-open-career">ENTRAR <ArrowRight size={17} /></button>
                 </div>
               )}

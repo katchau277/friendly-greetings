@@ -47,13 +47,19 @@ function Index() {
             <img className="fc26-player fc26-player-vini" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Vinicius_Junior_(2025).jpg" alt="" />
             <img className="fc26-player fc26-player-dembele" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Ousmane_Dembele_France_v_Morocco_9_July_2026-185.jpg" alt="" />
           </>
-        ) : (
+        ) : screen === "career" ? (
+          <>
+            <img className="fc26-player fc26-player-yamal" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Lamine_Yamal_in_2025.jpg" alt="" />
+            <img className="fc26-player fc26-player-vini" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Vinicius_Junior_(2025).jpg" alt="" />
+            <img className="fc26-player fc26-player-dembele" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Ousmane_Dembele_France_v_Morocco_9_July_2026-185.jpg" alt="" />
+          </>
+        ) : screen === "dashboard" ? (
           <>
             <img className="fc26-player fc26-player-yamal" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Spain_World_Cup_winners_Argentina_v_Spain_19_July_2026-341_(Rodri).jpg" alt="" />
             <img className="fc26-player fc26-player-vini" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Kylian_Mbappé_with_the_2018_Soccer_World_Cup_trophy.jpg" alt="" />
             <img className="fc26-player fc26-player-dembele" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/France_champion_of_the_Football_World_Cup_Russia_2018_(Mabppé,_Griezmann,_Nabil_Fekir,_Olivier_Giroud)).jpg" alt="" />
           </>
-        )}
+        ) : null}
       </div>
       <div className="fc26-overlay" aria-hidden="true" />
       <div className="fc26-grid" />
@@ -79,7 +85,7 @@ function Index() {
               ))}
             </nav>
           </>
-        ) : (
+        ) : screen === "career" ? (
           <>
             <button type="button" className="fc26-back" onClick={() => setScreen("menu")}><ArrowLeft size={17} /> VOLTAR AO MENU</button>
             <div className="fc26-kicker">PLAYER CAREER / 01</div>
@@ -120,7 +126,7 @@ function Index() {
               )}
             </div>
           </>
-        )}
+        ) : null}
       </section>
 
       {screen === "roster" && (
